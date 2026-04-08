@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { Music, Video, FileText, Image, Archive, Activity, LogOut, TrendingUp } from 'lucide-react'
+import { adminRequest } from '../utils/api'
 
 const toolCards = [
   { key: 'audio', label: 'Audio', icon: Music, gradient: 'from-violet-500 to-purple-600' },
@@ -21,10 +21,8 @@ export default function AdminDashboard() {
     const ADMIN_PATH = import.meta.env.VITE_ADMIN_PATH || '/adminsetup'
     if (!token) { navigate(ADMIN_PATH); return }
 
-    axios.get('/api/admin/dashboard', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(r => setData(r.data))
+    adminRequest('get', '/admin/dashboard', null, token)
+      .then(r => setData(r))
       .catch(err => {
         if (err.response?.status === 401) {
           localStorage.removeItem('adminToken')

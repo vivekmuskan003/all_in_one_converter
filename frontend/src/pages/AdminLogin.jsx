@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { Lock, Mail, AlertCircle } from 'lucide-react'
+import { adminRequest } from '../utils/api'
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -15,7 +15,7 @@ export default function AdminLogin() {
     setLoading(true)
     setError('')
     try {
-      const { data } = await axios.post('/api/admin/login', { email, password })
+      const data = await adminRequest('post', '/admin/login', { email, password })
       localStorage.setItem('adminToken', data.token)
       navigate('/admin/dashboard')
     } catch (err) {

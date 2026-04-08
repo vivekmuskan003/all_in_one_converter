@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const BASE = '/api'
+// In dev: VITE_API_URL is empty → Vite proxy forwards /api → localhost:5000
+// In prod: VITE_API_URL = 'https://your-backend.onrender.com' → direct requests
+const BASE = (import.meta.env.VITE_API_URL || '') + '/api'
 
 export async function convertFile(endpoint, file, outputFormat, extra = {}, onProgress) {
   const form = new FormData()
@@ -50,17 +52,22 @@ export async function convertFile(endpoint, file, outputFormat, extra = {}, onPr
         }
         throw new Error(message)
       } catch (parseErr) {
-        if (parseErr.message && parseErr.message !== '[object Object]') {
-          throw parseErr
-        }
+        if (parseErr.message && parseErr.message !== '[object Object]') throw parseErr
       }
     }
 
-    // Network error or no response
     if (!err.response) {
-      throw new Error('Cannot reach the server. Make sure the backend is running on port 5000.')
+      throw new Error('Cannot reach the server. Make sure the backend is running.')
     }
 
     throw new Error(err.message || 'Conversion failed')
   }
+}
+
+// For admin API calls (JSON responses, not blobs)
+export async function adminRequest(method, endpoint, data, token) {
+  const url = `${BASE}${endpoint}`
+  const headers = token ? { Authorization: `Bearer ${token}` } : {}
+  const response = await axios({ method, url, data, headers })
+  return response.data
 }
