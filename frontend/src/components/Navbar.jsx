@@ -8,7 +8,6 @@ const links = [
   { to: '/image', label: 'Image' },
   { to: '/audio', label: 'Audio' },
   { to: '/video', label: 'Video' },
-  { to: '/document', label: 'Document' },
   { to: '/compress', label: 'Compress' },
 ]
 

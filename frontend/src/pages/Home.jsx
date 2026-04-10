@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Music, Video, FileText, Image, Archive, ArrowRight, Zap, Shield, Clock } from 'lucide-react'
+import { Music, Video, Image, Archive, ArrowRight, Zap, Shield, Clock } from 'lucide-react'
 
 const tools = [
   {
@@ -25,25 +25,14 @@ const tools = [
     tagColor: 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300',
   },
   {
-    to: '/document',
-    icon: FileText,
-    title: 'Document Converter',
-    desc: 'Convert PDF, Word, PowerPoint, TXT and other documents',
-    gradient: 'from-orange-500 to-amber-600',
-    bg: 'bg-orange-50 dark:bg-orange-950/30',
-    border: 'border-orange-100 dark:border-orange-800/40',
-    formats: ['PDF', 'DOCX', 'PPTX', 'TXT', 'ODT'],
-    tagColor: 'bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300',
-  },
-  {
     to: '/image',
     icon: Image,
     title: 'Image Converter',
-    desc: 'Compress and convert JPG, PNG, WebP, GIF, BMP and more',
+    desc: 'Compress and convert JPG, PNG, WebP, BMP, TIFF and more',
     gradient: 'from-pink-500 to-rose-600',
     bg: 'bg-pink-50 dark:bg-pink-950/30',
     border: 'border-pink-100 dark:border-pink-800/40',
-    formats: ['JPG', 'PNG', 'WebP', 'GIF', 'TIFF'],
+    formats: ['JPG', 'PNG', 'WebP', 'BMP', 'TIFF'],
     tagColor: 'bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300',
   },
   {
@@ -82,7 +71,7 @@ export default function Home() {
           </span>
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-lg max-w-2xl mx-auto mb-8">
-          Audio, video, documents, images — convert between 40+ formats with professional quality.
+          Audio, video, images — convert between 30+ formats with professional quality.
           Free, fast, and no signup required.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
